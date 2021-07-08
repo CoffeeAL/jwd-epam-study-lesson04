@@ -1,0 +1,3 @@
+passenger, model-Boeing-747, max speed-965, amount passengers - 45, range fl -    2455, plane weight - 13464, crew amount - 12, takeoff weight- 18453, fuel consumption-12.9
+passenger, model-CRJ-700, max speed-875, max passengers- 70, range flight-2566, weight-34682, amount crew  -10, max takeoff weight - 53245, fuel - 15.8
+passenger, model-Boeing-747, maxspeed-965, range flight-13570, plane weight -175600, fuel consumption -24.6, crew - 10, max amount passengers-416, weight for takeoff -221290
