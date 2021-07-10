@@ -3,7 +3,6 @@ package by.epamtc.loiko.lesson04.entity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 /**
  * @author Alexey Loiko

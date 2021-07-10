@@ -41,6 +41,7 @@ public class AircompanyRunner {
         printTotalPassengersReport(service);
         printMaxTakeoffWeightReport(service);
         printFastestPlaneReport(service);
+        printReportAfterSortingByMaxSpeedAscending(service);
     }
 
     public static void printTotalPassengersReport(AircompanyService service)
@@ -80,5 +81,12 @@ public class AircompanyRunner {
 
     private static Plane findFastest(AircompanyService service) throws NullAircompanyException {
         return service.findFastestPlane();
+    }
+
+    public static void printReportAfterSortingByMaxSpeedAscending(AircompanyService service)
+            throws NullServiceException, NullAircompanyException {
+        AircompanyService.checkNotNullService(service);
+        service.sortPlanesByMaxSpeed();
+        System.out.println("Aircompany after sorting by max speed ascending:\n" + service.getAircompany());
     }
 }

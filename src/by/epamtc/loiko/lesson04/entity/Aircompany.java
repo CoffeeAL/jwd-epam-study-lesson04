@@ -1,11 +1,13 @@
 package by.epamtc.loiko.lesson04.entity;
 
+import by.epamtc.loiko.lesson04.comparator.PlaneMaxSpeedComparator;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -80,6 +82,10 @@ public class Aircompany implements Serializable {
             }
         }
         return spaciousPlanes;
+    }
+
+    public void sortPlanesByMaxSpeed() {
+        Collections.sort(planes, new PlaneMaxSpeedComparator());
     }
 
     @Override

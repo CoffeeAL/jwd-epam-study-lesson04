@@ -85,6 +85,11 @@ public final class AircompanyService {
         return aircompany.getPlanes().get(0);
     }
 
+    public void sortPlanesByMaxSpeed() throws NullAircompanyException {
+        checkNotNullAircompany();
+        aircompany.sortPlanesByMaxSpeed();
+    }
+
     public boolean addPlane(Plane plane) throws NullPlaneException, IllegalFieldValueException, NullAircompanyException {
         checkNotNullAircompany();
         if (plane == null) {
