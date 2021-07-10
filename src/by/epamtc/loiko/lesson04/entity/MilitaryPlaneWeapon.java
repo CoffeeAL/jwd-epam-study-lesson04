@@ -15,6 +15,7 @@ import java.io.Serializable;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class MilitaryPlaneWeapon implements Serializable {
 
     private String weaponName;

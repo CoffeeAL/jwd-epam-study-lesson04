@@ -1,9 +1,9 @@
 package by.epamtc.loiko.lesson04.entity;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 import java.io.Serializable;
 
@@ -15,6 +15,7 @@ import java.io.Serializable;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@SuperBuilder
 public abstract class Plane implements Serializable {
 
     private String model;
@@ -23,4 +24,11 @@ public abstract class Plane implements Serializable {
     private int emptyPlaneWeight;
     private double fuelConsumption;
     private int crewAmount;
+
+    @Override
+    public String toString() {
+        return "model = " + model + ", max speed = " + maxSpeed + ", range flight = " + rangeFlight +
+                ", empty plane weight = " + emptyPlaneWeight + ", fuel consumption = " + fuelConsumption +
+                ", crew amount = " + crewAmount + ", ";
+    }
 }

@@ -1,9 +1,9 @@
 package by.epamtc.loiko.lesson04.entity;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 /**
  * @author Alexey Loiko
@@ -13,15 +13,15 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@SuperBuilder
 public class PassengerPlane extends Plane {
 
     private int passengerSeatAmount;
-    private int maxWeightPeopleAndLuggage;
+    private int maxTakeoffWeight;
 
-//    public PassengerPlane(String model, int maxSpeed, int rangeFlight, int emptyPlaneWeight, double fuelConsumption,
-//                          int crewAmount, int passengerSeatAmount, int maxWeightPeopleAndLuggage) {
-//        super(model, maxSpeed, rangeFlight, emptyPlaneWeight, fuelConsumption, crewAmount);
-//        this.passengerSeatAmount = passengerSeatAmount;
-//        this.maxWeightPeopleAndLuggage = maxWeightPeopleAndLuggage;
-//    }
+    @Override
+    public String toString() {
+        return "PassengerPlane {" + super.toString() + "seats amount = " + passengerSeatAmount +
+                ", max takeoff weight = " + maxTakeoffWeight + "}";
+    }
 }

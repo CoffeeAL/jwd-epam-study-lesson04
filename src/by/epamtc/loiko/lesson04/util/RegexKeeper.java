@@ -17,4 +17,5 @@ public final class RegexKeeper {
     public static final String CREW_AMOUNT = ".*crew.*\\s*-\\s*";
     public static final String MAX_LOADED_PLANE = ".*takeoff.*-\\s*";
     public static final String FUEL_CONSUMPTION = ".*fuel.*-\\s*";
+    public static final String TYPE = "type\\s*-\\s*";
 }

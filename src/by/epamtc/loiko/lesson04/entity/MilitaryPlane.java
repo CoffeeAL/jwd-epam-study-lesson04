@@ -1,9 +1,9 @@
 package by.epamtc.loiko.lesson04.entity;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,14 +16,18 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@SuperBuilder
 public class MilitaryPlane extends Plane {
 
     private TypeMilitaryPlane type;
     private List<MilitaryPlaneWeapon> weapons = new ArrayList<>();
 
-    public MilitaryPlane(String model, int maxSpeed, int rangeFlight, int emptyPlaneWeight, double fuelConsumption,
-                         int crewAmount, TypeMilitaryPlane type) {
-        super(model, maxSpeed, rangeFlight, emptyPlaneWeight, fuelConsumption, crewAmount);
-        this.type = type;
+    public boolean addWeapon(MilitaryPlaneWeapon weapon) {
+        return weapons.add(weapon);
+    }
+
+    @Override
+    public String toString() {
+        return "MilitaryPlane {" + super.toString() + "type = " + type + ", weapons = " + weapons + "}";
     }
 }

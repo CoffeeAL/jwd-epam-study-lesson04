@@ -1,9 +1,10 @@
 package by.epamtc.loiko.lesson04.util;
 
-import by.epamtc.loiko.lesson04.entity.Airport;
+import by.epamtc.loiko.lesson04.entity.Aircompany;
 import by.epamtc.loiko.lesson04.entity.MilitaryPlane;
 import by.epamtc.loiko.lesson04.entity.PassengerPlane;
 import by.epamtc.loiko.lesson04.entity.Plane;
+import by.epamtc.loiko.lesson04.entity.TypeMilitaryPlane;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -26,30 +27,31 @@ import static by.epamtc.loiko.lesson04.util.RegexKeeper.MAX_SPEED;
 import static by.epamtc.loiko.lesson04.util.RegexKeeper.MODEL_PATTERN;
 import static by.epamtc.loiko.lesson04.util.RegexKeeper.PLANE_WEIGHT;
 import static by.epamtc.loiko.lesson04.util.RegexKeeper.RANGE_FLIGHT;
+import static by.epamtc.loiko.lesson04.util.RegexKeeper.TYPE;
 
 /**
  * @author Alexey Loiko
  * @project jwd-epam-study-lesson04
  */
 
-public final class AirportFactory<T extends Plane> {
+public final class AircompanyFactory<T extends Plane> {
 
     private static List<Plane> planes = new ArrayList<>();
     private static final String RESOURCE_FILE = "datasource.txt";
 
-    public static Airport createAirportFromFileAsDataSource() {
-        AirportFactory factory = new AirportFactory();
+    public static Aircompany createAirportFromFileAsDataSource() {
+        AircompanyFactory factory = new AircompanyFactory();
         try {
             InputStream inputStream = factory.getFileFromResourcesAsStream(RESOURCE_FILE);
             readInputStream(inputStream);
         } catch (IOException e) {
             throw new RuntimeException(e.getMessage());
         }
-        return new Airport("Belarus", "Minsk-2", 3, 15, planes);
+        return new Aircompany("Ireland", "Ryanair", planes);
     }
 
     private InputStream getFileFromResourcesAsStream(String fileName) throws FileNotFoundException {
-        ClassLoader classLoader = AirportFactory.class.getClassLoader();
+        ClassLoader classLoader = AircompanyFactory.class.getClassLoader();
         InputStream inputStream = classLoader.getResourceAsStream(fileName);
         if (inputStream == null) {
             throw new FileNotFoundException("File " + fileName + " not found");
@@ -107,7 +109,18 @@ public final class AirportFactory<T extends Plane> {
             }
             if (isPattern(MAX_LOADED_PLANE, parameter) && plane instanceof PassengerPlane) {
                 int maxLoadedPlaneWeight = parseIntFromPattern(MAX_LOADED_PLANE, parameter);
-                ((PassengerPlane) plane).setMaxWeightPeopleAndLuggage(maxLoadedPlaneWeight);
+                ((PassengerPlane) plane).setMaxTakeoffWeight(maxLoadedPlaneWeight);
+            }
+            if (isPattern(TYPE, parameter) && plane instanceof MilitaryPlane) {
+                String type = pullStringValueFromPattern(TYPE, parameter);
+                //TODO reduce code
+                if (type.equals(TypeMilitaryPlane.BOMBER.getName())) {
+                    ((MilitaryPlane) plane).setType(TypeMilitaryPlane.BOMBER);
+                } else if (type.equals(TypeMilitaryPlane.FIGHTER.getName())) {
+                    ((MilitaryPlane) plane).setType(TypeMilitaryPlane.FIGHTER);
+                } else if (type.equals(TypeMilitaryPlane.FIGHTER_BOMBER.getName())) {
+                    ((MilitaryPlane) plane).setType(TypeMilitaryPlane.FIGHTER_BOMBER);
+                }
             }
         }
         return planes.add(plane);

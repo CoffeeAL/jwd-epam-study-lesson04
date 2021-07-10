@@ -12,12 +12,16 @@ import lombok.ToString;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 public enum TypeMilitaryPlane {
 
-    BOMBER("бомбардировщик"),
-    FIGHTER("истребитель"),
-    FIGHTER_BOMBER("истребитель-бомбардировщик");
+    BOMBER("bomber"),
+    FIGHTER("fighter"),
+    FIGHTER_BOMBER("fighter-bomber");
 
     private String name;
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }
