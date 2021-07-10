@@ -25,8 +25,7 @@ public final class ParserUtil {
 
     public static double parseDoubleFromPattern(String regex, String parameter) {
         String str = pullStringValueFromPattern(regex, parameter);
-        boolean a = isRealNumber(str);
-        return a ? Double.parseDouble(str) : -1.0;
+        return isRealNumber(str) ? Double.parseDouble(str) : -1.0;
     }
 
     private boolean isInteger(String parameter) {
@@ -39,6 +38,9 @@ public final class ParserUtil {
     }
 
     public static String pullStringValueFromPattern(String regex, String parameter) {
+        if (Pattern.matches(regex, parameter)) {
+            return parameter;
+        }
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(parameter);
         StringBuilder stringBuilder = new StringBuilder();

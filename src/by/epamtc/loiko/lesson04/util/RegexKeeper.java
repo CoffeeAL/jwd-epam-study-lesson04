@@ -19,6 +19,6 @@ public final class RegexKeeper {
     public static final String FUEL_CONSUMPTION = ".*fuel.*-\\s*";
     public static final String TYPE = "type\\s*-\\s*";
     public static final String WEAPON = "weapon\\s*-\\s*\\[\\s*";
-    public static final String INTEGER = "[0?|[[1-9]0-9]*]";
-    public static final String REAL_NUMBER = "[0|[[1-9]0-9]+][\\.,]?[0-9]*";
+    public static final String INTEGER = "[0]|([1-9]+[0-9]*)";
+    public static final String REAL_NUMBER = "[1-9]0-9]+\\.[0-9]+";
 }

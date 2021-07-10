@@ -163,7 +163,6 @@ public final class AircompanyFactory<T extends Plane> {
     }
 
     private static boolean canBeWeapon(MilitaryPlaneWeapon weapon) {
-        boolean b = weapon.getDamage() > 0 && weapon.getWeight() > 0;
-        return b;
+        return weapon.getDamage() > 0 && weapon.getWeight() > 0;
     }
 }
