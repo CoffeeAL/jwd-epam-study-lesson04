@@ -12,8 +12,6 @@ import by.epamtc.loiko.lesson04.exception.NullServiceException;
 import by.epamtc.loiko.lesson04.service.AircompanyService;
 import by.epamtc.loiko.lesson04.util.AircompanyFactory;
 
-import java.util.List;
-
 /**
  * Авиакомпания. Определить иерархию самолетов. Создать авиакомпанию. Посчитать общую вместимость и грузоподъемность.
  * Провести сортировку самолетов компании на основе одного и нескольких параметров. Найти самолет в компании,
@@ -82,12 +80,5 @@ public class AircompanyRunner {
 
     private static Plane findFastest(AircompanyService service) throws NullAircompanyException {
         return service.findFastestPlane();
-    }
-
-    public static void printListPlanes(AircompanyService service) {
-        List<Plane> aircompanyPlanes = service.getAircompany().getPlanes();
-        for (Plane plane : aircompanyPlanes) {
-            System.out.println(plane);
-        }
     }
 }

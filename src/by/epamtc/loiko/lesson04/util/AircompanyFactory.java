@@ -2,6 +2,7 @@ package by.epamtc.loiko.lesson04.util;
 
 import by.epamtc.loiko.lesson04.entity.Aircompany;
 import by.epamtc.loiko.lesson04.entity.MilitaryPlane;
+import by.epamtc.loiko.lesson04.entity.MilitaryPlaneWeapon;
 import by.epamtc.loiko.lesson04.entity.PassengerPlane;
 import by.epamtc.loiko.lesson04.entity.Plane;
 import by.epamtc.loiko.lesson04.entity.TypeMilitaryPlane;
@@ -19,15 +20,19 @@ import static by.epamtc.loiko.lesson04.util.ParserUtil.isPattern;
 import static by.epamtc.loiko.lesson04.util.ParserUtil.parseDoubleFromPattern;
 import static by.epamtc.loiko.lesson04.util.ParserUtil.parseIntFromPattern;
 import static by.epamtc.loiko.lesson04.util.ParserUtil.pullStringValueFromPattern;
+import static by.epamtc.loiko.lesson04.util.ParserUtil.pullStringWeaponValueFromPattern;
 import static by.epamtc.loiko.lesson04.util.RegexKeeper.AMOUNT_PASSENGERS;
 import static by.epamtc.loiko.lesson04.util.RegexKeeper.CREW_AMOUNT;
 import static by.epamtc.loiko.lesson04.util.RegexKeeper.FUEL_CONSUMPTION;
 import static by.epamtc.loiko.lesson04.util.RegexKeeper.MAX_LOADED_PLANE;
 import static by.epamtc.loiko.lesson04.util.RegexKeeper.MAX_SPEED;
 import static by.epamtc.loiko.lesson04.util.RegexKeeper.MODEL_PATTERN;
+import static by.epamtc.loiko.lesson04.util.RegexKeeper.INTEGER;
 import static by.epamtc.loiko.lesson04.util.RegexKeeper.PLANE_WEIGHT;
 import static by.epamtc.loiko.lesson04.util.RegexKeeper.RANGE_FLIGHT;
+import static by.epamtc.loiko.lesson04.util.RegexKeeper.REAL_NUMBER;
 import static by.epamtc.loiko.lesson04.util.RegexKeeper.TYPE;
+import static by.epamtc.loiko.lesson04.util.RegexKeeper.WEAPON;
 
 /**
  * @author Alexey Loiko
@@ -82,34 +87,42 @@ public final class AircompanyFactory<T extends Plane> {
             if (isPattern(MODEL_PATTERN, parameter)) {
                 String model = pullStringValueFromPattern(MODEL_PATTERN, parameter);
                 plane.setModel(model);
+                continue;
             }
             if (isPattern(MAX_SPEED, parameter)) {
                 int maxSpeed = parseIntFromPattern(MAX_SPEED, parameter);
                 plane.setMaxSpeed(maxSpeed);
+                continue;
             }
             if (isPattern(RANGE_FLIGHT, parameter)) {
                 int rangeFlight = parseIntFromPattern(RANGE_FLIGHT, parameter);
                 plane.setRangeFlight(rangeFlight);
+                continue;
             }
             if (isPattern(CREW_AMOUNT, parameter)) {
                 int crewAmount = parseIntFromPattern(CREW_AMOUNT, parameter);
                 plane.setCrewAmount(crewAmount);
+                continue;
             }
             if (isPattern(PLANE_WEIGHT, parameter)) {
                 int emptyPlaneWeight = parseIntFromPattern(PLANE_WEIGHT, parameter);
                 plane.setEmptyPlaneWeight(emptyPlaneWeight);
+                continue;
             }
             if (isPattern(FUEL_CONSUMPTION, parameter)) {
                 double fuelConsumption = parseDoubleFromPattern(FUEL_CONSUMPTION, parameter);
                 plane.setFuelConsumption(fuelConsumption);
+                continue;
             }
             if (isPattern(AMOUNT_PASSENGERS, parameter) && plane instanceof PassengerPlane) {
                 int passengersAmount = parseIntFromPattern(AMOUNT_PASSENGERS, parameter);
                 ((PassengerPlane) plane).setPassengerSeatAmount(passengersAmount);
+                continue;
             }
             if (isPattern(MAX_LOADED_PLANE, parameter) && plane instanceof PassengerPlane) {
                 int maxLoadedPlaneWeight = parseIntFromPattern(MAX_LOADED_PLANE, parameter);
                 ((PassengerPlane) plane).setMaxTakeoffWeight(maxLoadedPlaneWeight);
+                continue;
             }
             if (isPattern(TYPE, parameter) && plane instanceof MilitaryPlane) {
                 String type = pullStringValueFromPattern(TYPE, parameter);
@@ -121,8 +134,36 @@ public final class AircompanyFactory<T extends Plane> {
                 } else if (type.equals(TypeMilitaryPlane.FIGHTER_BOMBER.getName())) {
                     ((MilitaryPlane) plane).setType(TypeMilitaryPlane.FIGHTER_BOMBER);
                 }
+                continue;
+            }
+            if (isPattern(WEAPON, parameter) && plane instanceof MilitaryPlane) {
+                String[] weapons = pullStringWeaponValueFromPattern(WEAPON, parameter);
+                MilitaryPlaneWeapon weapon = createWeapon(weapons);
+                if (canBeWeapon(weapon)) {
+                    ((MilitaryPlane) plane).addWeapon(weapon);
+                }
+                continue;
             }
         }
         return planes.add(plane);
+    }
+
+    private static MilitaryPlaneWeapon createWeapon(String[] weaponDescription) {
+        MilitaryPlaneWeapon weapon = new MilitaryPlaneWeapon();
+        for (int i = 0; i < weaponDescription.length; i++) {
+            if (i == 0) {
+                weapon.setWeaponName(weaponDescription[i]);
+            } else if (i == 1 && ParserUtil.parseDoubleFromPattern(REAL_NUMBER, weaponDescription[i]) != -1.0) {
+                weapon.setDamage(Double.valueOf(weaponDescription[i].trim()));
+            } else if (i == 2 && ParserUtil.parseIntFromPattern(INTEGER, weaponDescription[i]) != -1) {
+                weapon.setWeight(Integer.valueOf(weaponDescription[i].trim()));
+            }
+        }
+        return weapon;
+    }
+
+    private static boolean canBeWeapon(MilitaryPlaneWeapon weapon) {
+        boolean b = weapon.getDamage() > 0 && weapon.getWeight() > 0;
+        return b;
     }
 }

@@ -21,4 +21,9 @@ public class MilitaryPlaneWeapon implements Serializable {
     private String weaponName;
     private double damage;
     private int weight;
+
+    @Override
+    public String toString() {
+        return "Weapon {name = " + weaponName + ", damage = " + damage + ", weight = " + weight + "}";
+    }
 }

@@ -1,6 +1,6 @@
-passenger, model-Boeing-747, max speed-965, amount passengers - 45, range fl -    2455, plane weight - 13464, crew amount - 12, takeoff weight- 18453, fuel consumption-12.9
-passenger, model-CRJ-700, max speed-875, max passengers- 70, range flight-2566, weight-34682, amount crew  -10, max takeoff weight - 53245, fuel - 15.8
-passenger, model-Boeing-747, maxspeed-965, range flight-13570, plane weight -175600, fuel consumption -24.6, crew - 10, max amount passengers-416, weight for takeoff -221290
-military, model-Су-57, max speed -2500, range fl-4300, plane weight-18500, fuel consumption-10.6, crew-2, type-fighter
-military, model-F-117, max speed -993, range flight -4000, plane weight-13380, fuel consumption-11.0, crew-2, type-bomber
-military, model-МиГ-27, max speed-1885, range flight-2500, plane weight-11908, fuel consumption-15.3, crew-2, type-fighter-bomber
+passenger, model-Boeing-747, max speed-965, amount passengers - 45, range fl -    2455, plane weight - 13464, crew amount - 12, takeoff weight - 18453, fuel consumption-12.9
+passenger, model-CRJ-700, max speed-875, max passengers- 70, range flight-2566, plane weight-34682, amount crew  -10, takeoff weight - 53245, fuel - 15.8
+passenger, model-Boeing-747, maxspeed-965, range flight-13570, plane weight -175600, fuel consumption -24.6, crew - 10, max amount passengers-416, takeoff weight -221290
+military, model-Су-57, max speed -2500, range fl-4300, plane weight-18500, fuel consumption-10.6, crew-1, type-fighter, weapon-[rocket; 14.9; 23], weapon-[this; cannot; be; weapon]
+military, model-F-117, max speed -993, range flight -4000, plane weight-13380, fuel consumption-11.0, crew-2, type-bomber, weapon-[rocket; 2.1; 1], weapon - [bomb;56.1;12]
+military, model-МиГ-27, max speed-1885, range flight-2500, plane weight-11908, fuel consumption-15.3, crew-1, type-fighter-bomber, weapon-[rocket; 13.5; 28], weapon-   [bomb; 32.7; -14]
